@@ -16,14 +16,14 @@ help_list = json.loads(open('json/help.json').read())
 #
 
 
-async def change_status():  # Change TimBot "Playing" status every minute. Too frequent? Meh.
+async def change_status():  # Change TimBot "Playing" status 5 minutes.
     await client.wait_until_ready()
     msgs = cycle(status)
 
     while True:
         current_status = next(msgs)
         await client.change_presence(activity=discord.Game(name=current_status))
-        await asyncio.sleep(60)
+        await asyncio.sleep(300)
 
 
 @client.event
@@ -43,7 +43,7 @@ async def on_message(message):
     if message.content == "$dirtyclutching":
         await message.channel.send(file=discord.File("images/dirtyclutching/dirtyclutching.png"))
 
-    if message.content == "$stagex": # Random choice for more stageX related photos to be added later.
+    if message.content == "$stagex":  # Random choice for more stageX related photos to be added later.
         stageX_list = os.listdir("stageX/")
         stageX_String = random.choice(stageX_list)
         stageX_Path = "stageX/" + stageX_String
