@@ -40,30 +40,34 @@ async def on_message(message):
         if '' in message.content.lower():
             await message.channel.send("Do you think I'm fat? Type **'$help'** to see what else I can do.") and await message.add_reaction("👀")
 
-    if message.content == "$dirtyclutching":
-        await message.channel.send(file=discord.File("images/dirtyclutching/dirtyclutching.png"))
+    if message.startswith( '$' )
+        if message.content == "$dirtyclutching":
+            await message.channel.send(file=discord.File("images/dirtyclutching/dirtyclutching.png"))
 
-    if message.content == "$stagex": # Random choice for more stageX related photos to be added later.
-        stageX_list = os.listdir("stageX/")
-        stageX_String = random.choice(stageX_list)
-        stageX_Path = "stageX/" + stageX_String
-        await message.channel.send(file=discord.File(stageX_Path))
+        elif message.content == "$stagex": # Random choice for more stageX related photos to be added later.
+            stageX_list = os.listdir("stageX/")
+            stageX_String = random.choice(stageX_list)
+            stageX_Path = "stageX/" + stageX_String
+            await message.channel.send(file=discord.File(stageX_Path))
 
-    if message.content == "$tim":
-        imgList = os.listdir("images/")
-        imgString = random.choice(imgList)
-        imgPath = "images/" + imgString
+        elif message.content == "$tim":
+            imgList = os.listdir("images/")
+            imgString = random.choice(imgList)
+            imgPath = "images/" + imgString
 
-        await message.channel.send(file=discord.File(imgPath))
+            await message.channel.send(file=discord.File(imgPath))
 
-    if message.content == "$timquote":
-        quoteList = json.loads(open('json/quotes.json').read())
-        quoteSelect = random.choice(quoteList)
+        elif message.content == "$timquote":
+            quoteList = json.loads(open('json/quotes.json').read())
+            quoteSelect = random.choice(quoteList)
 
-        await message.channel.send(quoteSelect)
+            await message.channel.send(quoteSelect)
 
-    if "dsg" in message.content:
-        await message.channel.send("https://www.youtube.com/watch?v=v6wgLJjdOUc&feature=youtu.be")
+        elif "dsg" in message.content:
+            await message.channel.send("https://www.youtube.com/watch?v=v6wgLJjdOUc&feature=youtu.be")
+
+        else
+            await message.channel.send("I get used like a punching bag, and I never fire back. (TimBot doesn't have a response)")
 
 client.loop.create_task(change_status())
 client.run(TOKEN)
